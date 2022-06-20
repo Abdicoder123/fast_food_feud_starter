@@ -1,5 +1,6 @@
 # Fast Food Feud
 
+
 A local startup has asked Site interns to help them construct their new product - `Fast Food Feud`! They love the name and even have a tagline they workshopped: `Folks' Favorite Friendly Fuel Finder For Food Facts`. The one thing they don't have is a working application.
 
 Here's what they have to say about their vision for the mini-app:

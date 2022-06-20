@@ -1,8 +1,9 @@
-import * as React from "react"
-// IMPORT ANY NEEDED COMPONENTS HERE
-import { createDataSet } from "./data/dataset"
-import "./App.css"
-
+import * as React from "react";
+import Chip from "./components/Chip/Chip";
+import Instructions from "./components/Instructions/Instructions";
+import { createDataSet } from "./data/dataset";
+import "./App.css";
+import Header from "./components/Header/Header";
 // don't move this!
 export const appInfo = {
   title: `Fast Food Feud 🍔!`,
@@ -21,27 +22,43 @@ export const appInfo = {
 const { data, categories, restaurants } = createDataSet()
 
 export function App() {
+
+  const [restaurantList, setRestaurantList] = React.useState(null);
+  const [categoriesList, setCategoriesList] = React.useState(null);
+
+  //const currentMenuItems
   return (
     <main className="App">
       {/* CATEGORIES COLUMN */}
       <div className="CategoriesColumn col">
         <div className="categories options">
           <h2 className="title">Categories</h2>
-          {/* YOUR CODE HERE */}
+          {categories.map((item, idx) => (
+            <Chip key={idx} chip={idx} label ={item} isActive = {item === categoriesList} inclick = {() => {
+                  setCategoriesList(item);
+            }}/>
+          ))}
         </div>
       </div>
 
       {/* MAIN COLUMN */}
       <div className="container">
         {/* HEADER GOES HERE */}
+        <Header title = {appInfo.title} > </Header>
+        <Header tagline = {appInfo.tagline}></Header>
+        <Header description = {appInfo.description}></Header>
 
         {/* RESTAURANTS ROW */}
         <div className="RestaurantsRow">
           <h2 className="title">Restaurants</h2>
-          <div className="restaurants options">{/* YOUR CODE HERE */}</div>
+          <div className="restaurants options">{restaurants.map((rsnt, idx)=>(
+            <Chip key={idx} chip={idx} label = {rsnt} isActive = {rsnt === restaurantList} inclick = {() => {
+                  setRestaurantList(rsnt);
+            }} />
+          ))}</div>
         </div>
 
-        {/* INSTRUCTIONS GO HERE */}
+        <Instructions instruction = {appInfo.instructions}/>
 
         {/* MENU DISPLAY */}
         <div className="MenuDisplay display">
