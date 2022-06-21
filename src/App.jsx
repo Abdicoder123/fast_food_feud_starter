@@ -35,29 +35,7 @@ export function App() {
     );
   });
 
-  let instructions = "";
-
-  if (
-    categoriesList == null && restaurantList == null && menuList == null
-  ){
-    instructions = appInfo.instructions.start;
-  } else if (
-    categoriesList != null && restaurantList == null && menuList == null
-  ){
-    instructions = appInfo.instructions.onlyCategory;
-  } else if (
-    categoriesList == null && restaurantList != null && menuList == null
-  ){
-    instructions = appInfo.instructions.onlyRestaurant;
-  } else if (
-    categoriesList != null && restaurantList != null && menuList == null
-  ){
-    instructions = appInfo.instructions.noSelectedItem;
-  } else if (
-    categoriesList != null && restaurantList != null && menuList == null
-  ){
-    instructions = appInfo.instructions.allSelected;
-  }
+ 
   return (
     <main className="App">
       {/* CATEGORIES COLUMN */}
@@ -95,13 +73,13 @@ export function App() {
         <div className="MenuDisplay display">
           <div className="MenuItemButtons menu-items">
             <h2 className="title">Menu Items</h2>
-           {currMenuItems.map((menuItems, idx) => {
-            <Chip key={idx} label ={idx} isActive={menuList === menuItems}
-            onClick={()=> setMenuList(menuItems)}
-            />
+           {currMenuItems.map((menuItems, index) => {
+            //<Chip key={idx} label ={idx} isActive={menuList === menuItems}
+           // onClick={()=> setMenuList(menuItems)}
+            
               return(
-                <Chip key={menuItems.item_name} label ={menuItems.item_name} isActive={currMenuItems === menuItems}
-                onClick={()=> setMenuList(menuItems)}
+                <Chip key={index} label ={menuItems.item_name} isActive={currMenuItems === menuItems}
+                inclick={()=> setMenuList(menuItems)}
                 />
               );
             })}
@@ -109,7 +87,7 @@ export function App() {
 
           {/* NUTRITION FACTS */}
           <div className="NutritionFacts nutrition-facts">
-          {menuList != null && <NutritionalLabel ntrn={menuList}/>}
+          {menuList != null && <NutritionalLabel item_name={menuList}/>}
           </div>
         </div>
 
