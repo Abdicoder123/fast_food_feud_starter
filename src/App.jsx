@@ -95,7 +95,10 @@ export function App() {
         <div className="MenuDisplay display">
           <div className="MenuItemButtons menu-items">
             <h2 className="title">Menu Items</h2>
-           {currMenuItems.map((menuItems) => {
+           {currMenuItems.map((menuItems, idx) => {
+            <Chip key={idx} label ={idx} isActive={menuList === menuItems}
+            onClick={()=> setMenuList(menuItems)}
+            />
               return(
                 <Chip key={menuItems.item_name} label ={menuItems.item_name} isActive={currMenuItems === menuItems}
                 onClick={()=> setMenuList(menuItems)}
