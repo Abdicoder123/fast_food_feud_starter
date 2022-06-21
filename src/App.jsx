@@ -27,7 +27,7 @@ export function App() {
   const [restaurantList, setRestaurantList] = React.useState(null);
   const [categoriesList, setCategoriesList] = React.useState(null);
   const [menuList, setMenuList] = React.useState(null);
-
+  //console.log("hey")
   let currMenuItems = data.filter((m) => {
     return(
         m.food_category === categoriesList &&
@@ -40,11 +40,11 @@ export function App() {
   if (
     categoriesList == null && restaurantList == null && menuList == null
   ){
-    instructions = apppInfo.instructions.start;
+    instructions = appInfo.instructions.start;
   } else if (
     categoriesList != null && restaurantList == null && menuList == null
   ){
-    instructions = apppInfo.instructions.onlyCategory;
+    instructions = appInfo.instructions.onlyCategory;
   } else if (
     categoriesList == null && restaurantList != null && menuList == null
   ){
@@ -95,14 +95,14 @@ export function App() {
         <div className="MenuDisplay display">
           <div className="MenuItemButtons menu-items">
             <h2 className="title">Menu Items</h2>
-            {currMenuItems.map((menuItems) => {
+           {currMenuItems.map((menuItems) => {
               return(
-                <Chip key={menuItems.item_name} label ={menuItems.iten_name} isActive={currMenuItems === menuItems}
+                <Chip key={menuItems.item_name} label ={menuItems.item_name} isActive={currMenuItems === menuItems}
                 onClick={()=> setMenuList(menuItems)}
                 />
               );
             })}
-          </div>
+          </div> 
 
           {/* NUTRITION FACTS */}
           <div className="NutritionFacts nutrition-facts">
