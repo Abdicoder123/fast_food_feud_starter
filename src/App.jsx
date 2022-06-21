@@ -87,7 +87,7 @@ export function App() {
 
           {/* NUTRITION FACTS */}
           <div className="NutritionFacts nutrition-facts">
-          {menuList != null && <NutritionalLabel item_name={menuList}/>}
+          {menuList != null && <NutritionalLabel item={menuList}/>}
           </div>
         </div>
 
