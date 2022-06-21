@@ -4,6 +4,7 @@ import Instructions from "./components/Instructions/Instructions";
 import { createDataSet } from "./data/dataset";
 import "./App.css";
 import Header from "./components/Header/Header";
+import NutritionalLabel from "./components/NutritionalLabel/NutritionalLabel";
 // don't move this!
 export const appInfo = {
   title: `Fast Food Feud 🍔!`,
@@ -19,14 +20,44 @@ export const appInfo = {
   },
 }
 // or this!
-const { data, categories, restaurants } = createDataSet()
+const { data, categories, restaurants } = createDataSet();
 
 export function App() {
 
   const [restaurantList, setRestaurantList] = React.useState(null);
   const [categoriesList, setCategoriesList] = React.useState(null);
+  const [menuList, setMenuList] = React.useState(null);
 
-  //const currentMenuItems
+  let currMenuItems = data.filter((m) => {
+    return(
+        m.food_category === categoriesList &&
+        m.restaurant === restaurantList
+    );
+  });
+
+  let instructions = "";
+
+  if (
+    categoriesList == null && restaurantList == null && menuList == null
+  ){
+    instructions = apppInfo.instructions.start;
+  } else if (
+    categoriesList != null && restaurantList == null && menuList == null
+  ){
+    instructions = apppInfo.instructions.onlyCategory;
+  } else if (
+    categoriesList == null && restaurantList != null && menuList == null
+  ){
+    instructions = appInfo.instructions.onlyRestaurant;
+  } else if (
+    categoriesList != null && restaurantList != null && menuList == null
+  ){
+    instructions = appInfo.instructions.noSelectedItem;
+  } else if (
+    categoriesList != null && restaurantList != null && menuList == null
+  ){
+    instructions = appInfo.instructions.allSelected;
+  }
   return (
     <main className="App">
       {/* CATEGORIES COLUMN */}
@@ -64,11 +95,19 @@ export function App() {
         <div className="MenuDisplay display">
           <div className="MenuItemButtons menu-items">
             <h2 className="title">Menu Items</h2>
-            {/* YOUR CODE HERE */}
+            {currMenuItems.map((menuItems) => {
+              return(
+                <Chip key={menuItems.item_name} label ={menuItems.iten_name} isActive={currMenuItems === menuItems}
+                onClick={()=> setMenuList(menuItems)}
+                />
+              );
+            })}
           </div>
 
           {/* NUTRITION FACTS */}
-          <div className="NutritionFacts nutrition-facts">{/* YOUR CODE HERE */}</div>
+          <div className="NutritionFacts nutrition-facts">
+          {menuList != null && <NutritionalLabel ntrn={menuList}/>}
+          </div>
         </div>
 
         <div className="data-sources">
